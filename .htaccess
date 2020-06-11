@@ -1,0 +1,3 @@
+RedirectMatch 403 ^/config/(.*)?$
+RedirectMatch 403 ^/lib/(.*)?$
+RedirectMatch 403 ^/assignments/(.*)$
