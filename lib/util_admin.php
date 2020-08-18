@@ -148,6 +148,35 @@ function getTurnedInAssignments($slug)
   return $students;
 }
 
+/** Get the names and timestamps of all the students that have turned in the specified assignment
+ *  @param String $slug the slug of the assignment to retrieve students from
+ *  @return Array An array of student names that have turned something in for the specified assignment
+ */
+function getTurnedInAssignmentsWithTimestamp($slug)
+{
+  $path = "../assignments/${slug}";
+  $files = scandir($path);
+  $students = [];
+
+  foreach($files AS $file)
+  {
+    if('.' == $file || '..' == $file) continue;
+    if(!is_dir($path."/${file}")) continue;
+
+    //open log.txt
+    //read last line
+    $logPath = $path."/${file}/log.txt";
+    $log = trim(file_get_contents($logPath));
+    $log = explode("\n", $log);
+    $log = implode(",", $log);
+
+
+    array_push($students, [$file, $log]);
+  }
+
+  return $students;
+}
+
 /** Get assignment data from info.ini file
  *
  *  All data from info.ini will be retrieved for eaach assignment.
