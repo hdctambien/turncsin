@@ -69,8 +69,8 @@ $info = getAssignmentInfo($slug);
         <?php if(countTurnedInAssignments($slug) > 0): ?>
           <h2>Turned in</h2>
           <ul>
-            <?php foreach(getTurnedInAssignments($slug) AS $student): ?>
-              <li><?= $student ?></li>
+            <?php foreach(getTurnedInAssignmentsWithTimestamp($slug) AS $student): ?>
+              <li><?= $student[0] ?> on <?= $student[1] ?></li>
             <?php endforeach; ?>
           </ul>
         <?php endif; ?>
